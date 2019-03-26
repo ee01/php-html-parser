@@ -178,7 +178,7 @@ class Dom
             // use the default curl interface
             $curl = new Curl;
         }
-        $content = $curl->get($url);
+        $content = $curl->get($url, array_key_exists('curl', $options)?$options['curl']:[]);
 
         return $this->loadStr($content, $options);
     }
