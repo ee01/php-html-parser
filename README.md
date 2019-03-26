@@ -84,6 +84,25 @@ $dom->load('http://google.com');
 $html = $dom->outerHtml; // same result as the first example
 ```
 
+Use php cURL configurations including changing to POST method.
+
+```php
+// load via post method
+$dom_login->load('http://google.com/login', [
+	'curl' => [
+		CURLOPT_REFERER => 'http://google.com',
+		CURLOPT_HTTPHEADER => [
+			'Content-Type: application/json;',
+		],
+		CURLOPT_POST => 1,
+		CURLOPT_POSTFIELDS => [
+			'account' => '111'
+		]
+	]
+]);
+$html = $dom->outerHtml;
+```
+
 What makes the loadFromUrl method note worthy is the `PHPHtmlParser\CurlInterface` parameter, an optional second parameter. By default, we use the `PHPHtmlParser\Curl` class to get the contents of the url. On the other hand, though, you can inject your own implementation of CurlInterface and we will attempt to load the url using what ever tool/settings you want, up to you.
 
 ```php
